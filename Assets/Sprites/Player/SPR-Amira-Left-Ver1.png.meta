@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: e98db774a5000144e927d26ce08fa69b
+guid: 4624dca83c74bf042bd84405fb15ad61
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -176376170965989648
-    second: ANIM-Amira-RunSide-4Frames_0
-  - first:
-      213: -843553209727781528
-    second: ANIM-Amira-RunSide-4Frames_1
-  - first:
-      213: 7208917799854406849
-    second: ANIM-Amira-RunSide-4Frames_2
-  - first:
-      213: -2788713989344462411
-    second: ANIM-Amira-RunSide-4Frames_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,89 +97,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ANIM-Amira-RunSide-4Frames_0
+      name: SPR-Amira-Left-Ver1_0
       rect:
         serializedVersion: 2
-        x: 10
+        x: 0
         y: 0
-        width: 23
-        height: 32
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0f68ab69ec26d8df0800000000000000
-      internalID: -176376170965989648
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ANIM-Amira-RunSide-4Frames_1
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 0
-        width: 23
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 865f80933d81b44f0800000000000000
-      internalID: -843553209727781528
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ANIM-Amira-RunSide-4Frames_2
-      rect:
-        serializedVersion: 2
-        x: 106
-        y: 0
-        width: 23
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1ccff436b883b0460800000000000000
-      internalID: 7208917799854406849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ANIM-Amira-RunSide-4Frames_3
-      rect:
-        serializedVersion: 2
-        x: 154
-        y: 0
-        width: 23
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5b9f5f4e66f7c49d0800000000000000
-      internalID: -2788713989344462411
+      spriteID: 72b60aee0faf9864ba05c4f0ab773455
+      internalID: 1104084078
       vertices: []
       indices: 
       edges: []
@@ -200,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2c3e98da7223ce640b557776c75f1542
     internalID: 0
     vertices: []
     indices: 
@@ -208,12 +130,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":48.0,"y":48.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      ANIM-Amira-RunSide-4Frames_0: -176376170965989648
-      ANIM-Amira-RunSide-4Frames_1: -843553209727781528
-      ANIM-Amira-RunSide-4Frames_2: 7208917799854406849
-      ANIM-Amira-RunSide-4Frames_3: -2788713989344462411
+      SPR-Amira-Left-Ver1_0: 1104084078
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
