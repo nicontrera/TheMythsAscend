@@ -4,22 +4,29 @@ public class PlayerCombat : MonoBehaviour
 {
     private InputSystem_Actions playerControls;
     private Animator playerAnimator;
-    
-    // Referencia a nuestro script de movimiento
-    private PlayerController playerController; 
+    private PlayerController playerController;
 
     private readonly int attackTrigger = Animator.StringToHash("Attack");
+
+    [Header("Configuración de Hitbox de Espada")]
+    public Transform attackPoint; 
+    // Ahora usamos un Vector2 para controlar Ancho y Largo del corte por separado
+    public Vector2 hitboxSize = new Vector2(1.2f, 1f); 
+    public LayerMask enemyLayers;
+    public int attackDamage = 10;
+
+    [Tooltip("Fuerza base del empuje del arma.")]
+    public float knockbackForce = 50f;
 
     void Awake()
     {
         playerControls = new InputSystem_Actions();
         playerAnimator = GetComponent<Animator>();
-        // Buscamos el componente en el mismo GameObject
-        playerController = GetComponent<PlayerController>(); 
+        playerController = GetComponent<PlayerController>();
     }
 
     void OnEnable() { playerControls.Enable(); }
-    void OnDisable() { playerControls.Disable(); } // Agregado por seguridad
+    void OnDisable() { playerControls.Disable(); }
 
     void Start()
     {
@@ -28,19 +35,73 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        // Si ya está atacando, ignoramos el click para no reiniciar la animación a la mitad
         if (playerController.isAttacking) return;
 
-        // 1. Congelamos al jugador modificando el bool del otro script
         playerController.isAttacking = true;
-
-        // 2. Disparamos la animación
         playerAnimator.SetTrigger(attackTrigger);
     }
 
-    // 3. Esta función va a ser llamada por la animación cuando el espadazo termine
+    // FUNCIÓN ACTUALIZADA: Ahora proyecta un rectángulo que rota con la espada
+    // public void TriggerHitbox()
+    // {
+    //     // OverlapBoxAll toma: Posición, Tamaño (X, Y), Ángulo de rotación en Z, y la Capa
+    //     Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(
+    //         attackPoint.position, 
+    //         hitboxSize, 
+    //         attackPoint.eulerAngles.z, 
+    //         enemyLayers
+    //     );
+
+    //     foreach (Collider2D enemy in hitEnemies)
+    //     {
+    //         EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+    //         if (enemyHealth != null)
+    //         {
+    //             enemyHealth.TakeDamage(attackDamage);
+    //         }
+    //     }
+    // }
+
+    public void TriggerHitbox()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(
+            attackPoint.position, 
+            hitboxSize, 
+            attackPoint.eulerAngles.z, 
+            enemyLayers
+        );
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                // 1. Calculamos el vector de dirección: (Posición del Enemigo - Posición del Jugador)
+                Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
+
+                // 2. Le pasamos el daño, la dirección y la fuerza al enemigo
+                enemyHealth.TakeDamage(attackDamage, knockbackDirection, knockbackForce);
+            }
+        }
+    }
+
     public void FinishAttack()
     {
         playerController.isAttacking = false;
+    }
+
+    // GIZMOS ACTUALIZADOS: Dibuja la caja roja rotada en el Editor para que la ajustes fácilmente
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+        
+        Gizmos.color = Color.red;
+        // Guardamos la matriz original para no arruinar otros dibujos
+        Matrix4x4 oldMatrix = Gizmos.matrix;
+        // Rotamos el dibujo del Gizmo para que coincida con la rotación del AttackPoint
+        Gizmos.matrix = Matrix4x4.TRS(attackPoint.position, attackPoint.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, hitboxSize);
+        // Restauramos la matriz
+        Gizmos.matrix = oldMatrix;
     }
 }

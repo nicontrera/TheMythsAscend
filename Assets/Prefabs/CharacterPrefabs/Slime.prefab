@@ -103,9 +103,11 @@ GameObject:
   - component: {fileID: 7113231525834531435}
   - component: {fileID: 5476914592336860370}
   - component: {fileID: 2105606867838209788}
-  - component: {fileID: 1232372158831740871}
   - component: {fileID: 3399194642588327923}
-  m_Layer: 0
+  - component: {fileID: 6216987058431980602}
+  - component: {fileID: 1232372158831740871}
+  - component: {fileID: 7686289235246016486}
+  m_Layer: 6
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +202,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 12
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: e385740ac97d7f745a12e64fe7cec21f, type: 2}
@@ -210,7 +212,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -251,19 +253,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.011436816, y: 0.016011}
   m_Size: {x: 0.5059623, y: 0.4190505}
   m_Direction: 1
---- !u!114 &1232372158831740871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6783785675414661382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e47ab385a31c77408bb8d88d3112ecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  roamingPosition: {x: 0, y: 0}
 --- !u!114 &3399194642588327923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +266,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPathfinding
   moveSpeed: 1
+  isStaggered: 0
+--- !u!114 &6216987058431980602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783785675414661382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0aa2636fb5669b41bdbe41ef975a761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 30
+  spriteRenderer: {fileID: 0}
+  damageColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.1
+  knockbackResistance: 0
+--- !u!114 &1232372158831740871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783785675414661382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e47ab385a31c77408bb8d88d3112ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  detectRange: 4
+  stopChaseRange: 6
+  attackRange: 1.5
+  roamingPosition: {x: 0, y: 0}
+--- !u!114 &7686289235246016486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783785675414661382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809bfbcba558bc84ca4c7a7005da73e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCombat
+  damage: 10
+  dashSpeed: 12
+  knockbackForce: 15
+  attackRadius: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  windUpTime: 0.4
+  dashDuration: 0.2
+  recoveryTime: 0.6
+  spriteRenderer: {fileID: 0}
+  warningColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
