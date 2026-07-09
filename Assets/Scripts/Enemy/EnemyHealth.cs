@@ -4,8 +4,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Estadísticas")]
-    [SerializeField] private int maxHealth = 30;
-    private int currentHealth;
+    [SerializeField] protected int maxHealth = 30;
+    protected int currentHealth;
 
     [Header("Feedback Visual")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -20,20 +20,38 @@ public class EnemyHealth : MonoBehaviour
     
     private Rigidbody2D rb;
 
+    // void Awake()
+    // {
+    //     currentHealth = maxHealth;
+    //     rb = GetComponent<Rigidbody2D>();
+        
+    //     if (spriteRenderer == null) 
+    //         spriteRenderer = GetComponent<SpriteRenderer>();
+            
+    //     originalColor = spriteRenderer.color;
+    // }
+
     void Awake()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         
+        // CORRECCIÓN: Si no lo asignaste a mano en el Inspector, busca en este objeto Y en sus hijos
         if (spriteRenderer == null) 
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             
-        originalColor = spriteRenderer.color;
+        if (spriteRenderer != null)
+            originalColor = spriteRenderer.color;
+        else
+            Debug.LogError($"¡Ojo! No se encontró ningún SpriteRenderer en {gameObject.name} ni en sus hijos.");
     }
 
     // ACTUALIZADO: Ahora recibe la dirección del golpe y la fuerza del arma
-    public void TakeDamage(int damage, Vector2 knockbackDirection, float weaponKnockbackForce)
+    public virtual void TakeDamage(int damage, Vector2 knockbackDirection, float weaponKnockbackForce)
     {
+        // ¡REVISA LA CONSOLA! Aquí deberías ver cómo baja el número en cada golpe
+        Debug.Log($"¡{gameObject.name} recibió {damage} de daño! Salud restante: {currentHealth}/{maxHealth}");
+
         currentHealth -= damage;
         Debug.Log($"{gameObject.name} recibió {damage} de daño.");
 
@@ -84,7 +102,7 @@ public class EnemyHealth : MonoBehaviour
         spriteRenderer.color = originalColor;
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         Debug.Log($"{gameObject.name} ha muerto.");
         Destroy(gameObject);

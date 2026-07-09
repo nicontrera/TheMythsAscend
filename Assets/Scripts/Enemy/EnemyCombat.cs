@@ -16,14 +16,21 @@ public class EnemyCombat : MonoBehaviour
     public float recoveryTime = 0.6f; // Cuánto descansa después de atacar
 
     [Header("Feedback Visual")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    // [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] public SpriteRenderer spriteRenderer;
     [SerializeField] private Color warningColor = Color.yellow; // Color de aviso
-    private Color originalColor;
+    // private Color originalColor;
 
-    private Rigidbody2D rb;
-    private EnemyPathfinding pathfinding;
-    private EnemyAI enemyAI;
-    private bool hasDealtDamage = false;
+    // private Rigidbody2D rb;
+    // private EnemyPathfinding pathfinding;
+    // private EnemyAI enemyAI;
+    // private bool hasDealtDamage = false;
+    // Cambiamos 'private' por 'protected' para que LloronaCombat pueda usarlos
+    protected Rigidbody2D rb;
+    protected EnemyPathfinding pathfinding;
+    protected EnemyAI enemyAI;
+    protected bool hasDealtDamage = false;
+    protected Color originalColor;
 
     void Awake()
     {
@@ -73,8 +80,15 @@ public class EnemyCombat : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         yield return new WaitForSeconds(recoveryTime);
 
-        // Le avisamos a la IA que terminamos el ataque y puede volver a perseguir
-        enemyAI.OnAttackFinished();
+        // // Le avisamos a la IA que terminamos el ataque y puede volver a perseguir
+        // enemyAI.OnAttackFinished();
+
+        // En la rutina AttackRoutine de EnemyCombat.cs, al final del todo:
+        EnemyAI normalAI = GetComponent<EnemyAI>();
+        if (normalAI != null) normalAI.OnAttackFinished();
+
+        LloronaPhase1_AI bossAI = GetComponent<LloronaPhase1_AI>();
+        if (bossAI != null) bossAI.OnAttackFinished();
     }
 
     private void CheckHitPlayer()
